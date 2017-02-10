@@ -6,6 +6,6 @@ for i in ${symbols[@]}; do
         wget http://ichart.finance.yahoo.com/table.csv?s=${i}&c=1962
 done
 
-hadoop fs -copyFromLocal /home/worker/landingzone/* /user/worker/warehouse/stockprocessor/historic/input/landingzone
+hadoop fs -copyFromLocal /home/worker/landingzone /user/worker/warehouse/stockprocessor/historic/input/
 rm /home/worker/landingzone/*
 exit 0
