@@ -1,5 +1,7 @@
 use stockanalytics;
 
+drop table if exists HistoricalStockData;
+
 CREATE EXTERNAL TABLE IF NOT EXISTS HistoricalStockData(
         symbol_date DATE, 
         open DECIMAL(11,7),
