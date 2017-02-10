@@ -1,0 +1,18 @@
+apply plugin: 'java'
+
+repositories {
+	mavenCentral();
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile 'org.apache.hadoop:hadoop-mapreduce-client-core:2.7.3'
+}
+
+jar {
+	baseName	= 'HadoopProcessor'
+	version		= '0.1.0'
+	
+}
