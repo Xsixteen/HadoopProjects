@@ -27,7 +27,7 @@ public class ContiguousDataFinder {
 	       try {
 	         Statement statement = hiveDB.getConnection();
 	         //print each row
-	         ResultSet resultSet = statement.executeQuery("select symbol, syear, smonth, SUM(gainloss) FROM (select year(symbol_date) as syear, month(symbol_date) as smonth, gainloss, symbol from HistoricalStockDataGainLoss WHERE symbol = '"+ticker+"' and symbol_date > '"+begindate+"') v1 GROUP BY smonth, syear, symbol order by syear desc;");
+	         ResultSet resultSet = statement.executeQuery("select symbol, syear, smonth, SUM(gainloss) FROM (select year(symbol_date) as syear, month(symbol_date) as smonth, gainloss, symbol from HistoricalStockDataGainLoss WHERE symbol = '"+ticker+"' and symbol_date > '"+begindate+"') v1 GROUP BY smonth, syear, symbol order by syear desc");
 	        
 	         System.out.println("Processing Symbol="+ticker);
 	         
