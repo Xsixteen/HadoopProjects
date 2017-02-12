@@ -7,7 +7,7 @@ echo "Base Location = ${ROOT_LOCATION}"
 
 cd /home/worker/landingzone
 for i in ${symbols[@]}; do
-        wget "http://ichart.finance.yahoo.com/table.csv?s=${i}&c=1962" -O ${ROOT_LOCATION}/historicalstocks/landingzone/stock?${i}.csv
+        wget "http://ichart.finance.yahoo.com/table.csv?s=${i}&c=1962" -O ${ROOT_LOCATION}/historicalstocks/landingzone/splitstock${i}.csv
 done
 
 hadoop fs -copyFromLocal  ${ROOT_LOCATION}/historicalstocks/landingzone /user/worker/warehouse/stockprocessor/historic/input/

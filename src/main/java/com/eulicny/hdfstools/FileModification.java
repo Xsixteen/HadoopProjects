@@ -1,6 +1,7 @@
 package com.eulicny.hdfstools;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class FileModification implements IHdfsFileModification {
 	ArrayList<String> newHeaders 		= new ArrayList();
@@ -62,12 +63,14 @@ public class FileModification implements IHdfsFileModification {
 
 	@Override
 	public void setCurrentFile(String filename) {
-		String[] splitFile = filename.split("stock?");
-		this.symbol = splitFile[1];
+		String[] splitFile1 = filename.split("splitstock");
+		String[] splitFile2 = splitFile1[1].split(Pattern.quote(".")); 
+		
+		this.symbol = splitFile2[1];
 
 		System.out.println("Input Filename="+filename); 
 
-		
+		System.out.println ("Identified Symbol="+ this.symbol);
 
 		
 		System.out.println("Output File = " + this.symbol +".symfile");
