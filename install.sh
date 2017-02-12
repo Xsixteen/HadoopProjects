@@ -9,7 +9,7 @@ echo "Install Location? "
 
 read install_loc
 
-echo "$install_loc" >> "./scripts/variables.sh"
+echo "echo '$install_loc'" >> "./scripts/variables.sh"
 echo "Installing in: $install_loc"
 
 mkdir $install_loc/lib
