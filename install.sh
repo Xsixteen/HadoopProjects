@@ -1,15 +1,23 @@
 #!/bin/bash
 
-echo "HadoopScripts Project Installer===="
+echo "HadoopProjects Project Installer===="
 
 echo "Please Specify Install Location.  Make sure to use the full path, reference path below"
 pwd
 
-echo "Installation Path: " 
+echo "Install Location? " 
 
 read install_loc
 
+echo "Installing in: $install_loc"
+
+mkdir $install_loc/lib
+mkdir $install_loc/scripts
+mkdir $install_loc/hive
+
 cp ./build/libs/* $install_loc/lib/
 cp ./scripts/* $install_loc/scripts/
+cp ./hive/* $install_loc/hive/
+
 
 echo "Installation Completed===="
