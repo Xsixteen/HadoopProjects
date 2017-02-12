@@ -10,12 +10,21 @@ targetCompatibility = 1.7
 dependencies {
     compile 'org.apache.hadoop:hadoop-mapreduce-client-core:2.7.3'
     compile 'org.apache.hadoop:hadoop-common:2.7.3'
+    
+    incJars files('lib/hive-jdbc-1.2.1000.2.5.3.0-37-standalone.jar')
+    
 }
 
+configurations {
+	incJars
+}
 
 
 jar {
 	baseName	= 'HadoopProcessor'
 	version		= '0.1.0'
 	
+	from {
+            configurations.incJars.collect { it.isDirectory() ? it : zipTree(it) }
+        }
 }

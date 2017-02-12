@@ -2,6 +2,9 @@
 
 echo "HadoopProjects Project Installer===="
 
+echo "Building Gradle Project===="
+gradle build
+
 echo "Please Specify Install Location.  Make sure to use the full path, reference path below"
 pwd
 
