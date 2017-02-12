@@ -54,7 +54,7 @@ public class HDFSFolderReader {
 	        		String output = hdfsFileModification.writeOut();
 	        		Path file = new Path(this.outputFilepath + hdfsFileModification.getOutputFileName());
 	        		System.out.println("Output file location="+ this.outputFilepath + hdfsFileModification.getOutputFileName());
-	        		//if ( fs.exists( file )) { fs.delete( file, true ); } 
+	        		if ( fs.exists( file )) { fs.delete( file, true ); } 
 	        		
 	        		OutputStream os = fs.create(file);
 	        		BufferedWriter bw = new BufferedWriter( new OutputStreamWriter( os, "UTF-8" ) );
