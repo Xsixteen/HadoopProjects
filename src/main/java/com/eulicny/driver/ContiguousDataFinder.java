@@ -21,11 +21,12 @@ public class ContiguousDataFinder {
 		HashMap<Integer, YearMonthGainLoss>stockYearlyHashMap				= new HashMap<Integer, YearMonthGainLoss>();
 		YearMonthGainLoss workingRow;	
 		
-		System.out.println("ContiguousDataFinder Driver Starting");
+		System.out.println("ContiguousDataFinder Driver Starting.  Ticker =" + ticker + " Begin Date=" + begindate);
 		
 		HiveDB hiveDB = new HiveDB();
 	       try {
 	         Statement statement = hiveDB.getConnection();
+	         statement.executeQuery("use stockanalytics");
 	         //print each row
 	         ResultSet resultSet = statement.executeQuery("select symbol, syear, smonth, SUM(gainloss) FROM (select year(symbol_date) as syear, month(symbol_date) as smonth, gainloss, symbol from HistoricalStockDataGainLoss WHERE symbol = '"+ticker+"' and symbol_date > '"+begindate+"') v1 GROUP BY smonth, syear, symbol order by syear desc");
 	        
