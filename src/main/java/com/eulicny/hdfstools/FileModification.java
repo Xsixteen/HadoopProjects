@@ -62,6 +62,8 @@ public class FileModification implements IHdfsFileModification {
 
 	@Override
 	public void setCurrentFile(String filename) {
+		
+		System.out.println("Filename="+filename);
 		String[] splitFile = filename.split(".");
 		//extract file name
 		if(splitFile.length > 1)
