@@ -21,6 +21,7 @@ public class ContiguousDataFinder {
 		HashMap<Integer, YearMonthGainLoss>stockYearlyHashMap				= new HashMap<Integer, YearMonthGainLoss>();
 		YearMonthGainLoss workingRow;	
 		
+		System.out.println("ContiguousDataFinder Driver Starting");
 		
 		HiveDB hiveDB = new HiveDB();
 	       try {
@@ -93,9 +94,9 @@ public class ContiguousDataFinder {
 	        }
 	        
 	      } catch (ClassNotFoundException e) {
-	         //
+	         System.out.println("ClassNotFound Exception: " + e.getMessage());
 	      } catch (SQLException e) {
-	         //
+	         System.out.println("SQL Exception: " + e.getMessage());
 	      }
 	}
 }
