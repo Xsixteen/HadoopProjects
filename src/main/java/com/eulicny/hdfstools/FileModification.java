@@ -66,7 +66,7 @@ public class FileModification implements IHdfsFileModification {
 		String[] splitFile1 = filename.split("splitstock");
 		String[] splitFile2 = splitFile1[1].split(Pattern.quote(".")); 
 		
-		this.symbol = splitFile2[1];
+		this.symbol = splitFile2[0];
 
 		System.out.println("Input Filename="+filename); 
 
