@@ -1,0 +1,14 @@
+use stockanalytics;
+
+drop view if exists HistoricalStockDataGainLoss;
+
+CREATE VIEW IF NOT EXISTS HistoricalStockDataGainLoss as
+    SELECT symbol_date, close-open as gainloss, symbol FROM HistoricalStockData;
+    
+CREATE VIEW IF NOT EXISTS HistoricalStocksUpOrDownDay as
+	SELECT symbol, symbol_date,
+	case
+    when gainloss > 0 then 'positive'
+    when gainloss < 0 then 'negative'  
+    else 'neutral' end as close_value
+from HistoricalStockDataGainLoss;
