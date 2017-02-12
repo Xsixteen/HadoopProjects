@@ -62,12 +62,12 @@ public class FileModification implements IHdfsFileModification {
 
 	@Override
 	public void setCurrentFile(String filename) {
-		
-		System.out.println("Filename="+filename);
-		String[] splitFile = filename.split(".");
+		String[] splitFile = filename.split("-");
+		splitFile = splitFile[0].split(".");
+
+		System.out.println("Input Filename="+filename); 
 		//extract file name
-		if(splitFile.length > 1)
-			this.symbol = splitFile[0];
+		this.symbol = splitFile[0];
 		
 
 		
