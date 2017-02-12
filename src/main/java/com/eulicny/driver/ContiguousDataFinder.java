@@ -26,9 +26,8 @@ public class ContiguousDataFinder {
 		HiveDB hiveDB = new HiveDB();
 	       try {
 	         Statement statement = hiveDB.getConnection();
-	         statement.executeQuery("use stockanalytics");
 	         //print each row
-	         ResultSet resultSet = statement.executeQuery("select symbol, syear, smonth, SUM(gainloss) FROM (select year(symbol_date) as syear, month(symbol_date) as smonth, gainloss, symbol from HistoricalStockDataGainLoss WHERE symbol = '"+ticker+"' and symbol_date > '"+begindate+"') v1 GROUP BY smonth, syear, symbol order by syear desc");
+	         ResultSet resultSet = statement.executeQuery("select symbol, syear, smonth, SUM(gainloss) FROM (select year(symbol_date) as syear, month(symbol_date) as smonth, gainloss, symbol from stockanalytics.HistoricalStockDataGainLoss WHERE symbol = '"+ticker+"' and symbol_date > '"+begindate+"') v1 GROUP BY smonth, syear, symbol order by syear desc");
 	        
 	         System.out.println("Processing Symbol="+ticker);
 	         
@@ -88,7 +87,7 @@ public class ContiguousDataFinder {
 	            System.out.println("Symbol= " + ticker + " Year= " + pair.getKey() + " Number of Positive Contigous = " + numberOfPostiveContigous + " Number of Negative Contigous = " + numberOfNegativeContigous + " Positivity Scale = " + positiveAmount + " Negativity Scale = " + negativeAmount);
 	            
 	            
-		        statement.executeQuery("INSERT INTO TABLE ContiguousRun VALUES ('"+ticker+"', "+monthValueProcess.getYear()+","+numberOfPostiveContigous+","+numberOfNegativeContigous+","+positiveAmount+","+negativeAmount+")");
+		        statement.executeQuery("INSERT INTO TABLE stockanalytics.ContiguousRun VALUES ('"+ticker+"', "+monthValueProcess.getYear()+","+numberOfPostiveContigous+","+numberOfNegativeContigous+","+positiveAmount+","+negativeAmount+")");
 
 	            
 	           it.remove(); // avoids a ConcurrentModificationException
