@@ -36,7 +36,7 @@ public class ContiguousDataFinder {
 	        	  Integer year  	= new Integer(Integer.parseInt(resultSet.getString(2)));
 	        	  Double gainLoss 	= new Double(Double.parseDouble(resultSet.getString(4)));
 	        	  
-	        	  workingRow = (stockYearlyHashMap.get(year) == null ? stockYearlyHashMap.get(year) : new YearMonthGainLoss(year));
+	        	  workingRow = (stockYearlyHashMap.get(year) == null ? new YearMonthGainLoss(year) : stockYearlyHashMap.get(year));
 
 	        	  workingRow.setMonthGainLoss(month, gainLoss);
 	        	  stockYearlyHashMap.put(year, workingRow);
