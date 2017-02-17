@@ -18,8 +18,8 @@ public class ContiguousDataFinder {
          int numberOfMaxNegativeContigous = 0;
          int positiveMaxCounter = 0;
          int negativeMaxCounter = 0;
-         String maxContigPosYear 	= "";
-         String maxContigNegYear	= "";
+         Integer maxContigPosYear 	= 0;
+         Integer maxContigNegYear	= 0;
 		String ticker 		= args[0];
 		String begindate 	= args[1];
 		
@@ -82,7 +82,7 @@ public class ContiguousDataFinder {
 							    //Total Max Contiguous Run
 							if(positiveMaxCounter > numberOfMaxPostiveContigous) {
 								numberOfMaxPostiveContigous = positiveMaxCounter;
-								maxContigPosYear = (String) pair.getKey();	
+								maxContigPosYear = (Integer) pair.getKey();	
 							}
 							
 							negativeMaxCounter = 0;
@@ -100,7 +100,7 @@ public class ContiguousDataFinder {
 							//Total Max Contiguous Run
 							if(negativeMaxCounter > numberOfMaxNegativeContigous) {
 								numberOfMaxNegativeContigous = negativeMaxCounter;
-								maxContigNegYear = (String) pair.getKey();	
+								maxContigNegYear = (Integer) pair.getKey();	
 							}
 							
 							positiveMaxCounter = 0;
