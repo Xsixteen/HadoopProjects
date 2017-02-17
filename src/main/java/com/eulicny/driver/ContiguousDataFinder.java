@@ -14,7 +14,12 @@ import com.eulicny.contiguous.YearMonthGainLoss;
 public class ContiguousDataFinder {
 	
 	public static void main(String[] args) {	
-		
+	     int numberOfMaxPostiveContigous = 0;
+         int numberOfMaxNegativeContigous = 0;
+         int positiveMaxCounter = 0;
+         int negativeMaxCounter = 0;
+         String maxContigPosYear 	= "";
+         String maxContigNegYear	= "";
 		String ticker 		= args[0];
 		String begindate 	= args[1];
 		
@@ -57,6 +62,7 @@ public class ContiguousDataFinder {
 	            int positiveCounter = 0;
 	            int negativeCounter = 0;
 	            
+	       
 	            //Process the entire year.
 	            for(int i=1; i < 13 ; i++) {
 		            Double gainLoss = (Double) monthValueProcess.getMonthGainLoss(i);
@@ -71,6 +77,15 @@ public class ContiguousDataFinder {
 		            	
 		            	negativeCounter = 0;
 		            	
+			            //Total Max Contiguous Run
+		            	if(positiveMaxCounter > numberOfMaxPostiveContigous) {
+		            		numberOfMaxPostiveContigous = positiveMaxCounter;
+		            		maxContigPosYear = (String) pair.getKey();	
+		            	}
+		            	
+		            	negativeMaxCounter = 0;
+		            	
+		            	
 		            } else {
 		            	negativeAmount = negativeAmount + gainLoss;
 		            	negativeCounter++;
@@ -80,18 +95,28 @@ public class ContiguousDataFinder {
 		            	
 		            	positiveCounter = 0;
 		            	
+		            	//Total Max Contiguous Run
+		            	if(negativeMaxCounter > numberOfMaxNegativeContigous) {
+		            		numberOfMaxNegativeContigous = negativeMaxCounter;
+		            		maxContigNegYear = (String) pair.getKey();	
+		            	}
+		            	
+		            	positiveMaxCounter = 0;
+		            	
 		            }
+		            
 		          
 	            }
 	            
 	            System.out.println("Symbol= " + ticker + " Year= " + pair.getKey() + " Number of Positive Contigous = " + numberOfPostiveContigous + " Number of Negative Contigous = " + numberOfNegativeContigous + " Positivity Scale = " + positiveAmount + " Negativity Scale = " + negativeAmount);
 	            
 	            
-		        statement.executeQuery("INSERT INTO TABLE stockanalytics.ContiguousRun VALUES ('"+ticker+"', "+monthValueProcess.getYear()+","+numberOfPostiveContigous+","+numberOfNegativeContigous+","+positiveAmount+","+negativeAmount+")");
+		       // statement.executeQuery("INSERT INTO TABLE stockanalytics.ContiguousRun VALUES ('"+ticker+"', "+monthValueProcess.getYear()+","+numberOfPostiveContigous+","+numberOfNegativeContigous+","+positiveAmount+","+negativeAmount+")");
 
 	            
 	           it.remove(); // avoids a ConcurrentModificationException
 	        }
+	        System.out.println("Total Max Contiguous Runs="+ numberOfMaxPostiveContigous + " Around Year= "+ maxContigPosYear + " Total Max Negative Contiguous Runs=" +numberOfMaxNegativeContigous + " Around Year=" + maxContigNegYear);
 	        
 	        statement.close(); //close statement
 
