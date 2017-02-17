@@ -43,7 +43,7 @@ public class ContiguousDataFinder {
 	     
 	       	}
 	         
-	        statement.close(); //close statement
+	        System.out.println("Years in HashMap "+ stockYearlyHashMap.size());
 	        
 	        //Process the set of values
 	        
@@ -92,6 +92,9 @@ public class ContiguousDataFinder {
 	            
 	           it.remove(); // avoids a ConcurrentModificationException
 	        }
+	        
+	        statement.close(); //close statement
+
 	        
 	      } catch (ClassNotFoundException e) {
 	         System.out.println("ClassNotFound Exception: " + e.getMessage());
