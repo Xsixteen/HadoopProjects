@@ -66,45 +66,45 @@ public class ContiguousDataFinder {
 	            //Process the entire year.
 	            for(int i=1; i < 13 ; i++) {
 		            Double gainLoss = (Double) monthValueProcess.getMonthGainLoss(i);
-		            
-		            if(gainLoss > 0) {
-		            	positiveCounter++;
-		            	
-		            	positiveAmount = positiveAmount + gainLoss;
+		            if(gainLoss != null) {
+				    if(gainLoss > 0) {
+					positiveCounter++;
+					
+					positiveAmount = positiveAmount + gainLoss;
 
-		            	if(positiveCounter > numberOfPostiveContigous) 
-		            		numberOfPostiveContigous = positiveCounter;
-		            	
-		            	negativeCounter = 0;
-		            	
-			            //Total Max Contiguous Run
-		            	if(positiveMaxCounter > numberOfMaxPostiveContigous) {
-		            		numberOfMaxPostiveContigous = positiveMaxCounter;
-		            		maxContigPosYear = (String) pair.getKey();	
-		            	}
-		            	
-		            	negativeMaxCounter = 0;
-		            	
-		            	
-		            } else {
-		            	negativeAmount = negativeAmount + gainLoss;
-		            	negativeCounter++;
-		            	
-		            	if(negativeCounter > numberOfNegativeContigous) 
-		            		numberOfNegativeContigous = negativeCounter;
-		            	
-		            	positiveCounter = 0;
-		            	
-		            	//Total Max Contiguous Run
-		            	if(negativeMaxCounter > numberOfMaxNegativeContigous) {
-		            		numberOfMaxNegativeContigous = negativeMaxCounter;
-		            		maxContigNegYear = (String) pair.getKey();	
-		            	}
-		            	
-		            	positiveMaxCounter = 0;
-		            	
+					if(positiveCounter > numberOfPostiveContigous) 
+						numberOfPostiveContigous = positiveCounter;
+					
+					negativeCounter = 0;
+					
+					    //Total Max Contiguous Run
+					if(positiveMaxCounter > numberOfMaxPostiveContigous) {
+						numberOfMaxPostiveContigous = positiveMaxCounter;
+						maxContigPosYear = (String) pair.getKey();	
+					}
+					
+					negativeMaxCounter = 0;
+					
+					
+				    } else {
+					negativeAmount = negativeAmount + gainLoss;
+					negativeCounter++;
+					
+					if(negativeCounter > numberOfNegativeContigous) 
+						numberOfNegativeContigous = negativeCounter;
+					
+					positiveCounter = 0;
+					
+					//Total Max Contiguous Run
+					if(negativeMaxCounter > numberOfMaxNegativeContigous) {
+						numberOfMaxNegativeContigous = negativeMaxCounter;
+						maxContigNegYear = (String) pair.getKey();	
+					}
+					
+					positiveMaxCounter = 0;
+					
+				    }
 		            }
-		            
 		          
 	            }
 	            
