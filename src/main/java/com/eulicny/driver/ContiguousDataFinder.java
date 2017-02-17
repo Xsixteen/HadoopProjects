@@ -66,8 +66,8 @@ public class ContiguousDataFinder {
 		            	
 		            	positiveAmount = positiveAmount + gainLoss;
 
-		            	if(negativeCounter > numberOfNegativeContigous) 
-		            		numberOfNegativeContigous = negativeCounter;
+		            	if(positiveCounter > numberOfPostiveContigous) 
+		            		numberOfPostiveContigous = positiveCounter;
 		            	
 		            	negativeCounter = 0;
 		            	
@@ -75,8 +75,8 @@ public class ContiguousDataFinder {
 		            	negativeAmount = negativeAmount + gainLoss;
 		            	negativeCounter++;
 		            	
-		            	if(positiveCounter > numberOfPostiveContigous) 
-		            		numberOfPostiveContigous = positiveCounter;
+		            	if(negativeCounter > numberOfNegativeContigous) 
+		            		numberOfNegativeContigous = negativeCounter;
 		            	
 		            	positiveCounter = 0;
 		            	
