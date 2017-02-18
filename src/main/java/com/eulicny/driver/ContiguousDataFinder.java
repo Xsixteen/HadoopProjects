@@ -52,17 +52,17 @@ public class ContiguousDataFinder {
 	        System.out.println("Years in HashMap "+ stockYearlyHashMap.size());
 	        
 	        //Process the set of values
-	       Integer[] keys =  (Integer[]) stockYearlyHashMap.keySet().toArray();
+	       Object[] keys = stockYearlyHashMap.keySet().toArray();
 	       Arrays.sort(keys);
 	       
-	       for(Integer year : keys) {
+	       for(Object yearKey : keys) {
 	    	   
-
+	    	   int year = (Integer) yearKey;
 	       
 	     //   Iterator it = stockYearlyHashMap.entrySet().iterator();
 	       // (it.hasNext()) {
 	            //Map.Entry pair 						= (Map.Entry)it.next();
-	    	   YearMonthGainLoss monthValueProcess  = stockYearlyHashMap.get(year);
+	    	   YearMonthGainLoss monthValueProcess  = stockYearlyHashMap.get(yearKey);
 	            //YearMonthGainLoss monthValueProcess = (YearMonthGainLoss) pair.getValue();
 	            double negativeAmount = 0, positiveAmount = 0;
 	            int numberOfPostiveContigous = 0;
