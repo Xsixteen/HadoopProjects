@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -51,11 +52,18 @@ public class ContiguousDataFinder {
 	        System.out.println("Years in HashMap "+ stockYearlyHashMap.size());
 	        
 	        //Process the set of values
-	        
-	        Iterator it = stockYearlyHashMap.entrySet().iterator();
-	        while (it.hasNext()) {
-	            Map.Entry pair 						= (Map.Entry)it.next();
-	            YearMonthGainLoss monthValueProcess = (YearMonthGainLoss) pair.getValue();
+	       Integer[] keys =  (Integer[]) stockYearlyHashMap.keySet().toArray();
+	       Arrays.sort(keys);
+	       
+	       for(Integer year : keys) {
+	    	   
+
+	       
+	     //   Iterator it = stockYearlyHashMap.entrySet().iterator();
+	       // (it.hasNext()) {
+	            //Map.Entry pair 						= (Map.Entry)it.next();
+	    	   YearMonthGainLoss monthValueProcess  = stockYearlyHashMap.get(year);
+	            //YearMonthGainLoss monthValueProcess = (YearMonthGainLoss) pair.getValue();
 	            double negativeAmount = 0, positiveAmount = 0;
 	            int numberOfPostiveContigous = 0;
 	            int numberOfNegativeContigous = 0;
@@ -82,7 +90,7 @@ public class ContiguousDataFinder {
 							    //Total Max Contiguous Run
 							if(positiveMaxCounter > numberOfMaxPostiveContigous) {
 								numberOfMaxPostiveContigous = positiveMaxCounter;
-								maxContigPosYear = (Integer) pair.getKey();	
+								maxContigPosYear = year; //(Integer) pair.getKey();	
 							}
 							
 							negativeMaxCounter = 0;
@@ -100,7 +108,7 @@ public class ContiguousDataFinder {
 							//Total Max Contiguous Run
 							if(negativeMaxCounter > numberOfMaxNegativeContigous) {
 								numberOfMaxNegativeContigous = negativeMaxCounter;
-								maxContigNegYear = (Integer) pair.getKey();	
+								maxContigNegYear = year; //(Integer) pair.getKey();	
 							}
 							
 							positiveMaxCounter = 0;
@@ -109,15 +117,15 @@ public class ContiguousDataFinder {
 		            }
 		          
 	            }
-	            
-	            System.out.println("Symbol= " + ticker + " Year= " + pair.getKey() + " Number of Positive Contigous = " + numberOfPostiveContigous + " Number of Negative Contigous = " + numberOfNegativeContigous + " Positivity Scale = " + positiveAmount + " Negativity Scale = " + negativeAmount);
-	            
+	       
+	            System.out.println("Symbol= " + ticker + " Year= " + year + " Number of Positive Contigous = " + numberOfPostiveContigous + " Number of Negative Contigous = " + numberOfNegativeContigous + " Positivity Scale = " + positiveAmount + " Negativity Scale = " + negativeAmount);
+	       }  
 	            
 		       // statement.executeQuery("INSERT INTO TABLE stockanalytics.ContiguousRun VALUES ('"+ticker+"', "+monthValueProcess.getYear()+","+numberOfPostiveContigous+","+numberOfNegativeContigous+","+positiveAmount+","+negativeAmount+")");
 
 	            
-	           it.remove(); // avoids a ConcurrentModificationException
-	        }
+	           //it.remove(); // avoids a ConcurrentModificationException
+	        
 	        System.out.println("Total Max Contiguous Runs="+ numberOfMaxPostiveContigous + " Around Year= "+ maxContigPosYear + " Total Max Negative Contiguous Runs=" +numberOfMaxNegativeContigous + " Around Year=" + maxContigNegYear);
 	        
 	        statement.close(); //close statement
