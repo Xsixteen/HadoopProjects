@@ -21,7 +21,7 @@ CREATE EXTERNAL TABLE IF NOT EXISTS HistoricalStockData(
         symbol_date DATE, 
         monthend DECIMAL(11,7),
         monthstart DECIMAL(11,7),
-        adjclose DECIMAL(11,7),
+        difference DECIMAL(11,7),
         symbol STRING)
     COMMENT 'Historical Stock Data'
     ROW FORMAT DELIMITED
