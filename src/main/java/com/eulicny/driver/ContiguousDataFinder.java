@@ -57,12 +57,8 @@ public class ContiguousDataFinder {
 	       
 	       for(Object yearKey : keys) {
 	    	   
-	    	   int year = (Integer) yearKey;
-	       
-	     //   Iterator it = stockYearlyHashMap.entrySet().iterator();
-	       // (it.hasNext()) {
-	            //Map.Entry pair 						= (Map.Entry)it.next();
-	    	   YearMonthGainLoss monthValueProcess  = stockYearlyHashMap.get(yearKey);
+	    	    int year = (Integer) yearKey;
+	    	    YearMonthGainLoss monthValueProcess  = stockYearlyHashMap.get(yearKey);
 	            //YearMonthGainLoss monthValueProcess = (YearMonthGainLoss) pair.getValue();
 	            double negativeAmount = 0, positiveAmount = 0;
 	            int numberOfPostiveContigous = 0;
@@ -117,15 +113,13 @@ public class ContiguousDataFinder {
 		            }
 		          
 	            }
-	       
+			    //statement.executeQuery("INSERT INTO TABLE stockanalytics.ContiguousRun VALUES ('"+ticker+"', "+monthValueProcess.getYear()+","+numberOfPostiveContigous+","+numberOfNegativeContigous+","+positiveAmount+","+negativeAmount+")");
+
 	            System.out.println("Symbol= " + ticker + " Year= " + year + " Number of Positive Contigous = " + numberOfPostiveContigous + " Number of Negative Contigous = " + numberOfNegativeContigous + " Positivity Scale = " + positiveAmount + " Negativity Scale = " + negativeAmount);
 	       }  
 	            
-		       // statement.executeQuery("INSERT INTO TABLE stockanalytics.ContiguousRun VALUES ('"+ticker+"', "+monthValueProcess.getYear()+","+numberOfPostiveContigous+","+numberOfNegativeContigous+","+positiveAmount+","+negativeAmount+")");
 
-	            
-	           //it.remove(); // avoids a ConcurrentModificationException
-	        
+	            	        
 	        System.out.println("Total Max Contiguous Runs="+ numberOfMaxPostiveContigous + " Around Year= "+ maxContigPosYear + " Total Max Negative Contiguous Runs=" +numberOfMaxNegativeContigous + " Around Year=" + maxContigNegYear);
 	        
 	        statement.close(); //close statement
