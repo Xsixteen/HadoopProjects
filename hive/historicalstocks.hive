@@ -16,3 +16,15 @@ CREATE EXTERNAL TABLE IF NOT EXISTS HistoricalStockData(
     FIELDS TERMINATED BY ','
     STORED AS TEXTFILE
     location '/user/worker/warehouse/master/HistoricalStockData';
+    
+    CREATE EXTERNAL TABLE IF NOT EXISTS HistoricalStockDataStartEnd(
+        symbol_date DATE, 
+        monthend DECIMAL(11,7),
+        monthstart DECIMAL(11,7),
+        adjclose DECIMAL(11,7),
+        symbol STRING)
+    COMMENT 'Historical Stock Data'
+    ROW FORMAT DELIMITED
+    FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE
+    location '/user/worker/warehouse/master/HistoricalStockDataStartEnd';
