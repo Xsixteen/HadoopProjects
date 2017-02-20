@@ -36,7 +36,7 @@ public class MonthDataFinder {
 	       try {
 	         Statement statement = hiveDB.getConnection();
 	         //print each row
-	         ResultSet resultSet = statement.executeQuery("select symbol, syear, smonth, sday, close FROM (select year(symbol_date) as syear, month(symbol_date) as smonth, day(symbol_date) as sday, gainloss, symbol, close from stockanalytics.HistoricalStockDataGainLoss WHERE symbol = '"+ticker+"' and symbol_date > '"+begindate+"') v1 order by syear desc");
+	         ResultSet resultSet = statement.executeQuery("select symbol, syear, smonth, sday, close FROM (select year(symbol_date) as syear, month(symbol_date) as smonth, day(symbol_date) as sday, symbol, close from stockanalytics.HistoricalStockData WHERE symbol = '"+ticker+"' and symbol_date > '"+begindate+"') v1 order by syear desc");
 	        
 	         System.out.println("Processing Symbol="+ticker);
 	         
