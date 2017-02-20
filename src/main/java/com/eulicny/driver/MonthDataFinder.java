@@ -69,17 +69,18 @@ public class MonthDataFinder {
 	            //Process the entire year.
 	            for(int i=1; i < 13 ; i++) {
 		            Double startClose = (Double) monthValueProcess.getMonthDayClose(i, 1);
-		            Double endClose	  = 0.0;
-		            for(int j = 31; j > 0; j--) {
-		            	if((Double) monthValueProcess.getMonthDayClose(i, j) != null) {
-		            		endClose = (Double) monthValueProcess.getMonthDayClose(i, j);
-		            		break;
-		            	}
-
-		            }
+		            if (startClose != null ) {
+			            Double endClose	  = 0.0;
+			            for(int j = 31; j > 0; j--) {
+			            	if((Double) monthValueProcess.getMonthDayClose(i, j) != null) {
+			            		endClose = (Double) monthValueProcess.getMonthDayClose(i, j);
+			            		break;
+			            	}
+	
+			            }
 		            
 			       System.out.println("Symbol= " + ticker + " Year= " + year + " Month = " + i +" Month Start="+startClose + " Month End=" + endClose + " Difference=" +(endClose - startClose));
-
+		           }
 			    //statement.executeQuery("INSERT INTO TABLE stockanalytics.ContiguousRun VALUES ('"+ticker+"', "+monthValueProcess.getYear()+","+numberOfPostiveContigous+","+numberOfNegativeContigous+","+positiveAmount+","+negativeAmount+")");
 
 	            }  
