@@ -68,20 +68,28 @@ public class MonthDataFinder {
 	       
 	            //Process the entire year.
 	            for(int i=1; i < 13 ; i++) {
-		            Double startClose = (Double) monthValueProcess.getMonthDayClose(i, 1);
-		            if (startClose != null ) {
-			            Double endClose	  = 0.0;
-			            for(int j = 31; j > 0; j--) {
-			            	if((Double) monthValueProcess.getMonthDayClose(i, j) != null) {
-			            		endClose = (Double) monthValueProcess.getMonthDayClose(i, j);
-			            		break;
-			            	}
-	
-			            }
+		            Double startClose = 0.0;
+		            Double endClose	  = 0.0;
 		            
+		            //Ascertain End date
+		            for(int j = 31; j > 0; j--) {
+		            	if((Double) monthValueProcess.getMonthDayClose(i, j) != null) {
+		            		endClose = (Double) monthValueProcess.getMonthDayClose(i, j);
+		            		break;
+		            	}
+
+		            }
+			        //Ascertain start date
+		            for(int k = 0; k < 31; k++) {
+		            	if((Double) monthValueProcess.getMonthDayClose(i, k) != null) {
+		            		startClose = (Double) monthValueProcess.getMonthDayClose(i, k);
+		            		break;
+		            	}
+	
+			            
+				   //statement.executeQuery("INSERT INTO TABLE stockanalytics.HistoricalStockDataStartEnd VALUES ('"+year+"','"+i+"','"+startClose+"','"+endClose+"', '"+(endClose - startClose)+". '"+ticker+"'"); 
 			       System.out.println("Symbol= " + ticker + " Year= " + year + " Month = " + i +" Month Start="+startClose + " Month End=" + endClose + " Difference=" +(endClose - startClose));
 		           }
-			    //statement.executeQuery("INSERT INTO TABLE stockanalytics.ContiguousRun VALUES ('"+ticker+"', "+monthValueProcess.getYear()+","+numberOfPostiveContigous+","+numberOfNegativeContigous+","+positiveAmount+","+negativeAmount+")");
 
 	            }  
 	            
