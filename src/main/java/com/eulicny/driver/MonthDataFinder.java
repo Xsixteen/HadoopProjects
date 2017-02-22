@@ -29,7 +29,7 @@ public class MonthDataFinder {
 		YearMonthDayClose workingRow;	
 		
 
-		
+		Long startTime = System.currentTimeMillis();
 		System.out.println("MonthDataFinder Driver Starting.  Ticker =" + ticker + " Begin Date=" + begindate);
 		
 		HiveDB hiveDB = new HiveDB();
@@ -93,14 +93,11 @@ public class MonthDataFinder {
 
 
 	            }  
-	            
-
-	            	        
-	        System.out.println("Total Max Contiguous Runs="+ numberOfMaxPostiveContigous + " Around Year= "+ maxContigPosYear + " Total Max Negative Contiguous Runs=" +numberOfMaxNegativeContigous + " Around Year=" + maxContigNegYear);
-	        
-	        statement.close(); //close statement
+ 	  	        
 	       }
-	        
+	       statement.close(); //close statement
+           System.out.println("Operation Took: " + ((System.currentTimeMillis() - startTime)/1000) + " seconds");
+	         
 	      } catch (ClassNotFoundException e) {
 	         System.out.println("ClassNotFound Exception: " + e.getMessage());
 	      } catch (SQLException e) {
