@@ -87,9 +87,10 @@ public class MonthDataFinder {
 		            	}
 	
 			            
-				   //statement.executeQuery("INSERT INTO TABLE stockanalytics.HistoricalStockDataStartEnd VALUES ('"+year+"','"+i+"','"+startClose+"','"+endClose+"', '"+(endClose - startClose)+". '"+ticker+"'"); 
-			       System.out.println("Symbol= " + ticker + " Year= " + year + " Month = " + i +" Month Start="+startClose + " Month End=" + endClose + " Difference=" +(endClose - startClose));
 		           }
+				   System.out.println("Symbol= " + ticker + " Year= " + year + " Month = " + i +" Month Start="+startClose + " Month End=" + endClose + " Difference=" +(endClose - startClose));
+				   //statement.executeQuery("INSERT INTO TABLE stockanalytics.HistoricalStockDataStartEnd VALUES ('"+year+"','"+i+"','"+startClose+"','"+endClose+"', '"+(endClose - startClose)+". '"+ticker+"'"); 
+
 
 	            }  
 	            
