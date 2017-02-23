@@ -29,18 +29,4 @@ CREATE EXTERNAL TABLE IF NOT EXISTS HistoricalStockData(
     FIELDS TERMINATED BY ','
     STORED AS TEXTFILE
     location '/user/worker/warehouse/master/HistoricalStockDataStartEnd';
-    
-        
-    CREATE EXTERNAL TABLE IF NOT EXISTS HistoricalStockDataStartEnd_stage (
-        year INT,
-        month INT, 
-        monthstart DECIMAL(11,7),
-        monthend DECIMAL(11,7),
-        difference DECIMAL(11,7),
-        symbol STRING)
-    COMMENT 'Historical Stock Data'
-    ROW FORMAT DELIMITED
-    FIELDS TERMINATED BY ','
-    STORED AS TEXTFILE
-    location '/user/worker/public/stage/HistoricalStockDataStartEnd';
    
