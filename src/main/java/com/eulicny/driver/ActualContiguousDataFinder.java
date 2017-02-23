@@ -92,7 +92,7 @@ public class ActualContiguousDataFinder {
 							negativeMaxCounter = 0;
 						
 						
-					    } else {
+					    } else if (gainLoss < 0) {
 							negativeAmount = negativeAmount + gainLoss;
 							negativeCounter++;
 							negativeMaxCounter++;
