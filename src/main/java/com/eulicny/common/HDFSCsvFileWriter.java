@@ -42,7 +42,7 @@ public class HDFSCsvFileWriter {
 	
 	public void writeLine(String line) throws IOException {
 	 
-		bw.write(line);
+		bw.write(line + "\n");
 	
 	}
 }
