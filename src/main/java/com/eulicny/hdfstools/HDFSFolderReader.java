@@ -14,10 +14,10 @@ import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 
+import com.eulicny.common.Constants;
+
 public class HDFSFolderReader {
-	
-	final static String CONST_HDFS_LOCATION = "hdfs://ericdev01.aegisdoctrine.local:8020";
-	
+		
 	private String outputFilepath;
 	private String inputFilepath;
 	
@@ -31,9 +31,9 @@ public class HDFSFolderReader {
 	    Configuration conf = new Configuration();
 	    FileSystem fs;
 		try {
-			fs = FileSystem.get(new URI(CONST_HDFS_LOCATION), conf);
+			fs = FileSystem.get(new URI(Constants.CONST_HDFS_LOCATION), conf);
 	
-		    FileStatus[] fileStatus = fs.listStatus(new Path(CONST_HDFS_LOCATION + this.inputFilepath));
+		    FileStatus[] fileStatus = fs.listStatus(new Path(Constants.CONST_HDFS_LOCATION + this.inputFilepath));
 		    for(FileStatus status : fileStatus){
 		    	if(status.isFile()) {
 			    	//process each file

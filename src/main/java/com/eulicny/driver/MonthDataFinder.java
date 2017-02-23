@@ -1,5 +1,6 @@
 package com.eulicny.driver;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,6 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.eulicny.common.HDFSCsvFileWriter;
 import com.eulicny.common.HiveDB;
 import com.eulicny.contiguous.YearMonthDayClose;
 import com.eulicny.contiguous.YearMonthGainLoss;
@@ -16,15 +18,10 @@ import com.eulicny.contiguous.YearMonthGainLoss;
 public class MonthDataFinder {
 	
 	public static void main(String[] args) {	
-	     int numberOfMaxPostiveContigous = 0;
-         int numberOfMaxNegativeContigous = 0;
-         int positiveMaxCounter = 0;
-         int negativeMaxCounter = 0;
-         Integer maxContigPosYear 	= 0;
-         Integer maxContigNegYear	= 0;
 		String ticker 		= args[0];
 		String begindate 	= args[1];
-		
+		HDFSCsvFileWriter csvWriter	= new HDFSCsvFileWriter(args[2]);
+
 		HashMap<Integer, YearMonthDayClose>stockYearlyHashMap				= new HashMap<Integer, YearMonthDayClose>();
 		YearMonthDayClose workingRow;	
 		
@@ -59,7 +56,13 @@ public class MonthDataFinder {
 	        //Process the set of values
 	       Object[] keys = stockYearlyHashMap.keySet().toArray();
 	       Arrays.sort(keys);
-	       
+		   try {
+			csvWriter.open();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 	       for(Object yearKey : keys) {
 	    	   
 	    	    int year = (Integer) yearKey;
@@ -90,12 +93,17 @@ public class MonthDataFinder {
 		           }
 				   System.out.println("Symbol= " + ticker + " Year= " + year + " Month = " + i +" Month Start="+startClose + " Month End=" + endClose + " Difference=" +(endClose - startClose));
 				   statement.executeUpdate("INSERT INTO TABLE stockanalytics.HistoricalStockDataStartEnd_stage VALUES ('"+year+"','"+i+"','"+startClose+"','"+endClose+"', '"+(endClose - startClose)+"', '"+ticker+"')"); 
-
-
+				   try {
+						csvWriter.writeLine(year+","+i+","+startClose+","+endClose+","+(endClose - startClose)+","+ticker);
+				} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 	            }  
  	  	        
 	       }
 	       statement.close(); //close statement
+	       csvWriter.close();
            System.out.println("Operation Took: " + ((System.currentTimeMillis() - startTime)/1000) + " seconds");
 	         
 	      } catch (ClassNotFoundException e) {
