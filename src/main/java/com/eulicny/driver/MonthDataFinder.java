@@ -92,7 +92,7 @@ public class MonthDataFinder {
 			            
 		           }
 				   System.out.println("Symbol= " + ticker + " Year= " + year + " Month = " + i +" Month Start="+startClose + " Month End=" + endClose + " Difference=" +(endClose - startClose));
-				   statement.executeUpdate("INSERT INTO TABLE stockanalytics.HistoricalStockDataStartEnd_stage VALUES ('"+year+"','"+i+"','"+startClose+"','"+endClose+"', '"+(endClose - startClose)+"', '"+ticker+"')"); 
+				   //statement.executeUpdate("INSERT INTO TABLE stockanalytics.HistoricalStockDataStartEnd_stage VALUES ('"+year+"','"+i+"','"+startClose+"','"+endClose+"', '"+(endClose - startClose)+"', '"+ticker+"')"); 
 				   try {
 						csvWriter.writeLine(year+","+i+","+startClose+","+endClose+","+(endClose - startClose)+","+ticker);
 				} catch (IOException e) {
