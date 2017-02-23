@@ -33,7 +33,7 @@ public class ActualContiguousDataFinder {
 	       try {
 	         Statement statement = hiveDB.getConnection();
 	         //print each row
-	         ResultSet resultSet = statement.executeQuery("select symbol, year, month, difference FROM (select year, month, difference, symbol from stockanalytics.HistoricalStockDataStartEnd WHERE symbol = '"+ticker+"' and year > '"+beginYear+"') v1 GROUP BY month, year, symbol order by year desc");
+	         ResultSet resultSet = statement.executeQuery("select symbol, year, month, difference FROM (select year, month, difference, symbol from stockanalytics.HistoricalStockDataStartEnd WHERE symbol = '"+ticker+"' and year > '"+beginYear+"') v1 GROUP BY month, year, symbol, difference order by year desc");
 	        
 	         System.out.println("Processing Symbol="+ticker);
 	         
