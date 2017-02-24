@@ -136,6 +136,7 @@ public class ActualContiguousDataFinder {
 	        System.out.println("Total Max Contiguous Runs="+ numberOfMaxPostiveContigous + " Around Year= "+ maxContigPosYear + " Total Max Negative Contiguous Runs=" +numberOfMaxNegativeContigous + " Around Year=" + maxContigNegYear);
 	        
 	        statement.close(); //close statement
+		    csvWriter.close();
 
 	        
 	      } catch (ClassNotFoundException e) {
