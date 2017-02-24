@@ -1,5 +1,6 @@
 package com.eulicny.driver;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,6 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.eulicny.common.HDFSCsvFileWriter;
 import com.eulicny.common.HiveDB;
 import com.eulicny.contiguous.YearMonthGainLoss;
 
@@ -23,7 +25,8 @@ public class ActualContiguousDataFinder {
          Integer maxContigNegYear	= 0;
 		String ticker 		= args[0];
 		String beginYear 	= args[1];
-		
+		HDFSCsvFileWriter csvWriter	= new HDFSCsvFileWriter(args[2]);
+
 		HashMap<Integer, YearMonthGainLoss>stockYearlyHashMap				= new HashMap<Integer, YearMonthGainLoss>();
 		YearMonthGainLoss workingRow;	
 		
@@ -50,7 +53,12 @@ public class ActualContiguousDataFinder {
 	       	}
 	         
 	        System.out.println("Years in HashMap "+ stockYearlyHashMap.size());
-	        
+	 	   try {
+				csvWriter.open();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	        //Process the set of values
 	       Object[] keys = stockYearlyHashMap.keySet().toArray();
 	       Arrays.sort(keys);
@@ -114,7 +122,12 @@ public class ActualContiguousDataFinder {
 		          
 	            }
 			    //statement.executeQuery("INSERT INTO TABLE stockanalytics.ContiguousRun VALUES ('"+ticker+"', "+monthValueProcess.getYear()+","+numberOfPostiveContigous+","+numberOfNegativeContigous+","+positiveAmount+","+negativeAmount+")");
-
+	     	   try {
+					csvWriter.writeLine(ticker+","+year+","+numberOfPostiveContigous+","+numberOfNegativeContigous+","+positiveAmount+","+negativeAmount);
+	     	    } catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	            System.out.println("Symbol= " + ticker + " Year= " + year + " Number of Positive Contigous = " + numberOfPostiveContigous + " Number of Negative Contigous = " + numberOfNegativeContigous + " Positivity Scale = " + positiveAmount + " Negativity Scale = " + negativeAmount);
 	       }  
 	            

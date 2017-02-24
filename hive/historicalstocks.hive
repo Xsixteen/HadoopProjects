@@ -29,4 +29,5 @@ CREATE EXTERNAL TABLE IF NOT EXISTS HistoricalStockData(
     FIELDS TERMINATED BY ','
     STORED AS TEXTFILE
     location '/user/worker/warehouse/master/HistoricalStockDataStartEnd';
+
    

@@ -26,7 +26,7 @@ public class HDFSCsvFileWriter {
 			Path file = new Path(this.filename);
 			System.out.println("Output file location="+ this.filename);
 			
-			this.os = fs.create(file);
+			this.os = fs.create(file, true);
 			this.bw = new BufferedWriter( new OutputStreamWriter( os, "UTF-8" ) );
 	}
 	

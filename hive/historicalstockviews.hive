@@ -12,3 +12,11 @@ CREATE VIEW IF NOT EXISTS HistoricalStocksUpOrDownDay as
     when gainloss < 0 then 'negative'  
     else 'neutral' end as close_value
 from HistoricalStockDataGainLoss;
+
+CREATE VIEW IF NOT EXISTS HistoricalStocksUpOrDownDayActual as
+	SELECT symbol, year, month,
+	case
+    when difference > 0 then 'positive'
+    when difference < 0 then 'negative'  
+    else 'neutral' end as close_value
+from HistoricalStockDataStartEnd;
